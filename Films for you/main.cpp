@@ -2,9 +2,9 @@
 
 #include <QApplication>
 #include <iostream>
-#include "include/rapidjson/document.h"
-#include "include/rapidjson/writer.h"
-#include "include/rapidjson/stringbuffer.h"
+#include "rapidjson-master/include/rapidjson/document.h"
+#include "rapidjson-master/include/rapidjson/writer.h"
+#include "rapidjson-master/include/rapidjson/stringbuffer.h"
 #include <stdlib.h>
 #include <string>
 #include <curl/curl.h>
