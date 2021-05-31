@@ -22,7 +22,10 @@ public:
     std::map<std::string, double> country();
     std::map<std::string, double> director();
     std::map<std::string, double> actors();
-    std::map<std::string, std::string> recommendation();
+    std::map<std::string, int> recommendation_genre();
+    std::map<std::string, double> recommendation_country();
+    std::map<std::string, double> recommendation_director();
+    std::map<std::string, double> recommendation_actors();
     friend QDataStream &operator<<(QDataStream &out, const Profile &profile);
     friend QDataStream &operator>>(QDataStream &in, Profile &profile);
 };
