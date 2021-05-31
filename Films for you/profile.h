@@ -18,16 +18,21 @@ public:
     Profile();
     void like(std::vector<std::string> genre, std::vector<std::string> country, std::vector<std::string> director, std::vector<std::string> actors);
     void dislike(std::vector<std::string> genre, std::vector<std::string> country, std::vector<std::string> director, std::vector<std::string> actors);
-    std::map<std::string, double> genre();
-    std::map<std::string, double> country();
-    std::map<std::string, double> director();
-    std::map<std::string, double> actors();
+    std::map<std::string, double> genre() const;
+    std::map<std::string, double> country() const;
+    std::map<std::string, double> director() const;
+    std::map<std::string, double> actors() const;
+    void set_genre(const std::map<std::string, double>& value);
+    void set_country(const std::map<std::string, double>& value);
+    void set_director(const std::map<std::string, double>& value);
+    void set_actors(const std::map<std::string, double>& value);
     std::map<std::string, int> recommendation_genre();
     std::map<std::string, double> recommendation_country();
     std::map<std::string, double> recommendation_director();
     std::map<std::string, double> recommendation_actors();
-    friend QDataStream &operator<<(QDataStream &out, const Profile &profile);
-    friend QDataStream &operator>>(QDataStream &in, Profile &profile);
 };
+
+QDataStream &operator<<(QDataStream &out, const Profile &profile);
+QDataStream &operator>>(QDataStream &in, Profile &profile);
 
 #endif // PROFILE_H
