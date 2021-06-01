@@ -202,3 +202,74 @@ QDataStream &operator>>(QDataStream &in, Profile &profile)
 
     container.clear();
 }
+
+
+size_t Profile::curlWriteFunc(char *data, size_t size, size_t nmemb, string *buffer)
+{
+
+   size_t result = 0;
+
+   if (buffer != NULL)
+   {
+           buffer->append(data, size * nmemb);
+           result = size * nmemb;
+   }
+   return result;
+
+}
+std::map<std::string, int> Profile::count_of_films_by_genre()
+{
+    std::map<std::string, int> result;
+    for (auto &elem : genre()) {
+
+    std::string url = "https://imdb8.p.rapidapi.com/title/get-popular-movies-by-genre?genre=%2Fchart%2Fpopular%2Fgenre%2F"+elem.first+"&rapidapi-key=7108452cfbmsha343da9f70d1991p19f5bfjsn4fee4d4b283c";
+    char curlErrorBuffer[CURL_ERROR_SIZE];
+
+    CURL *curl = curl_easy_init();
+    if (curl) {
+            curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, curlErrorBuffer);
+            curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+            curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &curlBuffer);
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curlWriteFunc);
+            CURLcode curlResult = curl_easy_perform(curl);
+            curl_easy_cleanup(curl);
+            if (curlResult == CURLE_OK)
+            {
+                std::vector<string> counter;
+                int a = 0;
+                int second_slash = 0;
+                bool isSecondSlash = false;
+                for(size_t i =0; i<=curlBuffer.length(); i++){
+
+                    if(curlBuffer[i]=='/'){
+                        a++;
+                    }
+                    if(a==2 && !isSecondSlash){
+                        isSecondSlash =true;
+                        second_slash = i;
+                    }
+                    if(a==3){
+                        int start = second_slash+1;
+                        int count = i-start;
+                        std::string additional = curlBuffer.substr (start,count);
+                        counter.push_back(additional);
+                        isSecondSlash = false;
+                        a = 0;
+                    }
+
+                }
+                  result[elem.first] = counter.size();
+                 counter.clear();
+            }
+            else {
+                std::cout << "Error(" << curlResult << "): " << curlErrorBuffer << std::endl;
+
+            }
+             curlBuffer.clear();
+    }
+
+    }
+    return result;
+}

@@ -5,7 +5,15 @@
 #include <string>
 #include <vector>
 #include <QDataStream>
-
+#include <iostream>
+#include "rapidjson-master/include/rapidjson/document.h"
+#include "rapidjson-master/include/rapidjson/writer.h"
+#include "rapidjson-master/include/rapidjson/stringbuffer.h"
+#include <stdlib.h>
+#include <string>
+#include <curl/curl.h>
+using namespace std;
+using namespace rapidjson;
 class Profile
 {
 private:
@@ -13,6 +21,7 @@ private:
     std::map<std::string, double> _country;
     std::map<std::string, double> _director;
     std::map<std::string, double> _actors;
+    std::string curlBuffer;
     void change_weight(std::map<std::string, double>& characteristic, std::string key, double delta);
 public:
     Profile();
@@ -30,6 +39,8 @@ public:
     std::map<std::string, double> recommendation_country();
     std::map<std::string, double> recommendation_director();
     std::map<std::string, double> recommendation_actors();
+    static size_t curlWriteFunc(char *data, size_t size, size_t nmemb, std::string *buffer);
+    std::map<std::string, int> count_of_films_by_genre();
 };
 
 QDataStream &operator<<(QDataStream &out, const Profile &profile);
