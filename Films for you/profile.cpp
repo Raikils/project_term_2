@@ -204,7 +204,7 @@ QDataStream &operator>>(QDataStream &in, Profile &profile)
 }
 
 
-size_t Profile::curlWriteFunc(char *data, size_t size, size_t nmemb, string *buffer)
+size_t Profile::curlWriteFunc(char *data, size_t size, size_t nmemb, std::string *buffer)
 {
 
    size_t result = 0;
@@ -237,7 +237,7 @@ std::map<std::string, int> Profile::count_of_films_by_genre()
             curl_easy_cleanup(curl);
             if (curlResult == CURLE_OK)
             {
-                std::vector<string> counter;
+                std::vector<std::string> counter;
                 int a = 0;
                 int second_slash = 0;
                 bool isSecondSlash = false;
@@ -273,3 +273,6 @@ std::map<std::string, int> Profile::count_of_films_by_genre()
     }
     return result;
 }
+
+
+
