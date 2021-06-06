@@ -171,12 +171,12 @@ void Film::curl_set_options(CURL *curl)
 
 Film::Film(): _title(""), _id(""), _main_picture("")
 {
-    key_rapid_api = "c84a33e5ecmsh30280f927a53eecp11581ejsn7aeefb165750";
+    key_rapid_api = "0085a34427mshc7f717b41100917p17b262jsn6199c1564134";
 }
 
 Film::Film(std::string id)
 {
-    key_rapid_api = "c84a33e5ecmsh30280f927a53eecp11581ejsn7aeefb165750";
+    key_rapid_api = "0085a34427mshc7f717b41100917p17b262jsn6199c1564134";
     set_title_img_by_id(id);
     _genre = get_genre_by_id(id);
     _director = get_director_by_id(id);

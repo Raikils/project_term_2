@@ -15,6 +15,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 void MainWindow::film_search()
 {
     std::vector<std::string> films_title = profile.recommendation();
@@ -23,7 +24,8 @@ void MainWindow::film_search()
         pair.first = Film(title);
         QListWidgetItem * elem = new QListWidgetItem;
         elem->setSizeHint(QSize(200,250));
-        FilmForm *filmform = new FilmForm;
+        Profile *pr= new Profile;
+        FilmForm *filmform = new FilmForm(pr);
         filmform->SetImageFilm( QString::fromStdString(pair.first.main_picture()));
         filmform->SetTitleFilm( QString::fromStdString(pair.first.title()));
         QTextBrowser* description = new QTextBrowser();
