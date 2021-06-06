@@ -3,6 +3,16 @@
 #include <QString>
 #include <QDebug>
 
+std::string Profile::name() const
+{
+    return _name;
+}
+
+void Profile::setName(const std::string &name)
+{
+    _name = name;
+}
+
 void Profile::change_weight(std::map<std::string, double> &characteristic, std::string key, double delta)
 {
     for (auto &elem : characteristic) {
@@ -72,10 +82,10 @@ Profile::Profile()
     _genre["action-comedy"] = weight;
 }
 
-void Profile::like(std::vector<std::string> genre, std::vector<std::string> country, std::vector<std::string> director, std::vector<std::string> actors)
+void Profile::like(Film film)
 {
-    for (auto key : genre) change_weight(_genre, key, 0.1);
-    for (auto key : country) {
+    for (auto key : film.genre()) change_weight(_genre, key, 0.1);
+    /*for (auto key : country) {
         if (_country[key]) {
             _country[key] += 0.1;
         } else {
@@ -95,13 +105,13 @@ void Profile::like(std::vector<std::string> genre, std::vector<std::string> coun
         } else {
             _country[key] = 0.1;
         }
-    }
+    }*/
 }
 
-void Profile::dislike(std::vector<std::string> genre, std::vector<std::string> country, std::vector<std::string> director, std::vector<std::string> actors)
+void Profile::dislike(Film film)
 {
-    for (auto key : genre) change_weight(_genre, key, -0.1);
-    for (auto key : country) {
+    for (auto key : film.genre()) change_weight(_genre, key, -0.1);
+    /*for (auto key : country) {
         if (_country[key]) {
             _country[key] -= 0.1;
         } else {
@@ -121,7 +131,7 @@ void Profile::dislike(std::vector<std::string> genre, std::vector<std::string> c
         } else {
             _country[key] = -0.1;
         }
-    }
+    }*/
 }
 
 std::map<std::string, double> Profile::genre() const
@@ -198,6 +208,7 @@ QDataStream &operator<<(QDataStream &out, const Profile &profile)
     for (const auto& elem : profile.director()) {
         out << QString::fromStdString(elem.first) << elem.second;
     }
+    out << QString::fromStdString(profile.name());
 }
 QDataStream &operator>>(QDataStream &in, Profile &profile)
 {
@@ -240,6 +251,8 @@ QDataStream &operator>>(QDataStream &in, Profile &profile)
     profile.set_director(container);
 
     container.clear();
+    in >> name;
+    profile.setName(name.toStdString());
 }
 
 
