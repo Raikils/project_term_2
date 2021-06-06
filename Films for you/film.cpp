@@ -2,7 +2,7 @@
 #include "rapidjson-master/include/rapidjson/document.h"
 #include "rapidjson-master/include/rapidjson/writer.h"
 #include "rapidjson-master/include/rapidjson/stringbuffer.h"
-
+#include <QFile>
 #include <QDebug>
 
 
@@ -10,11 +10,6 @@
 std::string Film::title() const
 {
     return _title;
-}
-
-void Film::setTitle(const std::string &title)
-{
-    _title = title;
 }
 
 std::string Film::id() const
@@ -32,19 +27,9 @@ std::string Film::main_picture() const
     return _main_picture;
 }
 
-void Film::setMain_picture(const std::string &main_picture)
-{
-    _main_picture = main_picture;
-}
-
 std::vector<std::string> Film::genre() const
 {
     return _genre;
-}
-
-void Film::setGenre(const std::vector<std::string> &genre)
-{
-    _genre = genre;
 }
 
 std::vector<std::string> Film::country() const
@@ -52,29 +37,14 @@ std::vector<std::string> Film::country() const
     return _country;
 }
 
-void Film::setCountry(const std::vector<std::string> &country)
-{
-    _country = country;
-}
-
 std::vector<std::string> Film::director() const
 {
     return _director;
 }
 
-void Film::setDirector(const std::vector<std::string> &director)
-{
-    _director = director;
-}
-
 std::vector<std::string> Film::actors() const
 {
     return _actors;
-}
-
-void Film::setActors(const std::vector<std::string> &actors)
-{
-    _actors = actors;
 }
 
 std::vector<std::string> Film::get_genre_by_id(std::string id)
@@ -131,6 +101,22 @@ std::vector<std::string> Film::get_actors_by_title(std::string title)
     doc.Parse(buffer.c_str());
 }
 
+std::string Film::get_description_by_id(std::string id)
+{
+    CURL* curl = curl_easy_init();
+    CURLcode result;
+    std::string url = "https://imdb8.p.rapidapi.com/title/get-overview-details?tconst=" + id + "&currentCountry=US";
+    curl_set_options(curl);
+    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    result = curl_easy_perform(curl);
+    curl_easy_cleanup(curl);
+    rapidjson::Document doc;
+    doc.Parse(buffer.c_str());
+    rapidjson::Value& title_parse = doc["plotSummary"]["text"];
+    buffer.clear();
+    return title_parse.GetString();
+}
+
 void Film::set_title_img_by_id(std::string id)
 {
     CURL* curl = curl_easy_init();
@@ -157,6 +143,11 @@ std::string Film::getKey_rapid_api() const
 void Film::setKey_rapid_api(const std::string &value)
 {
     key_rapid_api = value;
+}
+
+std::string Film::getDescription() const
+{
+    return _description;
 }
 
 size_t Film::curl_write(void *ptr, size_t size, size_t nmemb, void *stream)
@@ -189,4 +180,5 @@ Film::Film(std::string id)
     set_title_img_by_id(id);
     _genre = get_genre_by_id(id);
     _director = get_director_by_id(id);
+    _description = get_description_by_id(id);
 }
