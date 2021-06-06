@@ -22,9 +22,13 @@ private:
     std::map<std::string, double> _director;
     std::map<std::string, double> _actors;
     std::string curlBuffer;
+    std::string buffer;
     void change_weight(std::map<std::string, double>& characteristic, std::string key, double delta);
+
+    static size_t curl_write( void *ptr, size_t size, size_t nmemb, void *stream);
 public:
     Profile();
+    std::vector<std::string> search_films(int n, std::string genre);
     void like(std::vector<std::string> genre, std::vector<std::string> country, std::vector<std::string> director, std::vector<std::string> actors);
     void dislike(std::vector<std::string> genre, std::vector<std::string> country, std::vector<std::string> director, std::vector<std::string> actors);
     std::map<std::string, double> genre() const;
@@ -41,6 +45,7 @@ public:
     std::map<std::string, double> recommendation_actors();
     static size_t curlWriteFunc(char *data, size_t size, size_t nmemb, std::string *buffer);
     std::map<std::string, int> count_of_films_by_genre();
+    std::vector<std::string> recommendation();
 };
 
 QDataStream &operator<<(QDataStream &out, const Profile &profile);

@@ -57,7 +57,7 @@ background-color: none;</string>
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="listWidget_2">
+       <widget class="QListWidget" name="listWidget_recommended_movie">
         <property name="styleSheet">
          <string notr="true">border-color: rgb(255, 255, 0);
 border-radius:20px;</string>

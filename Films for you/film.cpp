@@ -181,4 +181,5 @@ Film::Film(std::string id)
     _genre = get_genre_by_id(id);
     _director = get_director_by_id(id);
     _description = get_description_by_id(id);
+    _id = id;
 }
