@@ -20,6 +20,7 @@ std::string Film::id() const
 void Film::setId(const std::string &id)
 {
     _id = id;
+   get_info_by_id(id);
 }
 
 std::string Film::main_picture() const
@@ -32,106 +33,29 @@ std::vector<std::string> Film::genre() const
     return _genre;
 }
 
-std::vector<std::string> Film::country() const
-{
-    return _country;
-}
-
-std::vector<std::string> Film::director() const
-{
-    return _director;
-}
-
-std::vector<std::string> Film::actors() const
-{
-    return _actors;
-}
-
-std::vector<std::string> Film::get_genre_by_id(std::string id)
-{
-    std::vector<std::string> genres;
-    CURL* curl = curl_easy_init();
-    CURLcode result;
-    std::string url = "https://imdb8.p.rapidapi.com/title/get-genres?tconst=" + id;
-    curl_set_options(curl);
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    result = curl_easy_perform(curl);
-    curl_easy_cleanup(curl);
-    rapidjson::Document doc;
-    doc.Parse(buffer.c_str());
-    rapidjson::Value& genre_array = doc;
-    for (int i = 0; i < genre_array.Size(); i++) {
-        genres.push_back(genre_array[i].GetString());
-    }
-    buffer.clear();
-    return genres;
-}
-
-std::vector<std::string> Film::get_director_by_id(std::string id)
-{
-    std::vector<std::string> directors;
-    CURL* curl = curl_easy_init();
-    CURLcode result;
-    std::string url = "https://imdb8.p.rapidapi.com/title/get-full-credits?tconst=" + id;
-    curl_set_options(curl);
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    result = curl_easy_perform(curl);
-    curl_easy_cleanup(curl);
-    rapidjson::Document doc;
-    doc.Parse(buffer.c_str());
-    rapidjson::Value& directors_parse = doc["crew"]["director"];
-    for (int i = 0; i < directors_parse.Size(); i++) {
-        directors.push_back(directors_parse[i]["name"].GetString());
-    }
-    buffer.clear();
-    return directors;
-}
-
-std::vector<std::string> Film::get_actors_by_title(std::string title)
-{
-    std::vector<std::string> directors;
-    CURL* curl = curl_easy_init();
-    CURLcode result;
-    std::string url = "https://imdb8.p.rapidapi.com/title/get-full-credits?tconst=" + title;
-    curl_set_options(curl);
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    result = curl_easy_perform(curl);
-    curl_easy_cleanup(curl);
-    rapidjson::Document doc;
-    doc.Parse(buffer.c_str());
-}
-
-std::string Film::get_description_by_id(std::string id)
+void Film::get_info_by_id(std::string id)
 {
     CURL* curl = curl_easy_init();
-    CURLcode result;
     std::string url = "https://imdb8.p.rapidapi.com/title/get-overview-details?tconst=" + id + "&currentCountry=US";
     curl_set_options(curl);
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    result = curl_easy_perform(curl);
+    curl_easy_perform(curl);
     curl_easy_cleanup(curl);
     rapidjson::Document doc;
     doc.Parse(buffer.c_str());
-    rapidjson::Value& title_parse = doc["plotSummary"]["text"];
-    buffer.clear();
-    return title_parse.GetString();
-}
-
-void Film::set_title_img_by_id(std::string id)
-{
-    CURL* curl = curl_easy_init();
-    CURLcode result;
-    std::string url = "https://imdb8.p.rapidapi.com/title/get-details?tconst=" + id;
-    curl_set_options(curl);
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    result = curl_easy_perform(curl);
-    curl_easy_cleanup(curl);
-    rapidjson::Document doc;
-    doc.Parse(buffer.c_str());
-    rapidjson::Value& title_parse = doc["title"];
-    rapidjson::Value& img = doc["image"]["url"];
+    rapidjson::Value& title_parse = doc["title"]["title"];
+    rapidjson::Value& img = doc["title"]["image"]["url"];
+    rapidjson::Value& genre_parse = doc["genres"];
     _title = title_parse.GetString();
     _main_picture = img.GetString();
+    for (int i = 0; i < genre_parse.Size(); i++) {
+        _genre.push_back(genre_parse[i].GetString());
+    }
+    if (doc["plotSummary"].IsObject()) {
+        _description = doc["plotSummary"]["text"].GetString();
+    } else {
+        _description = doc["plotOutline"]["text"].GetString();
+    }
     buffer.clear();
 }
 
@@ -177,9 +101,6 @@ Film::Film(): _title(""), _id(""), _main_picture("")
 Film::Film(std::string id)
 {
     key_rapid_api = "0085a34427mshc7f717b41100917p17b262jsn6199c1564134";
-    set_title_img_by_id(id);
-    _genre = get_genre_by_id(id);
-    _director = get_director_by_id(id);
-    _description = get_description_by_id(id);
     _id = id;
+    get_info_by_id(id);
 }
