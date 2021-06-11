@@ -5,6 +5,7 @@
 #include "profile.h"
 #include "film.h"
 #include "filmform.h"
+#include "profilemenu.h"
 #include <QVector>
 #include <QPair>
 
@@ -23,8 +24,11 @@ private slots:
     void film_search();
     void on_pushButton_clicked();
 
+    void on_pushButton_toProfile_clicked();
+
 private:
     Ui::MainWindow *ui;
+    ProfileMenu *profilemenu;
     Profile profile;
     QVector<QPair<Film,FilmForm*>> films;
 };

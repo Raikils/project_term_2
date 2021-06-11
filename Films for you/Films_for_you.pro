@@ -17,17 +17,20 @@ SOURCES += \
     filmform.cpp \
     main.cpp \
     mainwindow.cpp \
-    profile.cpp
+    profile.cpp \
+    profilemenu.cpp
 
 HEADERS += \
     film.h \
     filmform.h \
     mainwindow.h \
-    profile.h
+    profile.h \
+    profilemenu.h
 
 FORMS += \
     filmform.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    profilemenu.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

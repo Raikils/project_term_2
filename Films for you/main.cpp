@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "profilemenu.h"
 
 #include <QApplication>
 #include <iostream>

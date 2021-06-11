@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ProfileMenu</class>
+ <widget class="QWidget" name="ProfileMenu">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1307</width>
+    <height>625</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ProfileMenu</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(53, 53, 53);
+
+background-color: qlineargradient(spread:pad, x1:0.249692, y1:0.215, x2:1, y2:1, stop:0.259615 rgba(63, 63, 63, 255), stop:1 rgba(120, 120, 120, 255));
+border: 2px solid ;</string>
+  </property>
+  <widget class="QListWidget" name="listWidget_Profile">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>80</y>
+     <width>1241</width>
+     <height>421</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(255, 255, 0);
+border-radius:20px;
+color: yellow;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_Profile">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>20</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sitka Text</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(212, 212, 0);
+border:none;
+background-color: none;</string>
+   </property>
+   <property name="text">
+    <string>Profiles</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SelectProfile">
+   <property name="geometry">
+    <rect>
+     <x>1070</x>
+     <y>530</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sitka Text</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(212, 212, 0);
+border-color: rgb(255, 255, 0);
+border-radius:10px;</string>
+   </property>
+   <property name="text">
+    <string>Select profile</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="addProfile">
+   <property name="geometry">
+    <rect>
+     <x>174</x>
+     <y>552</y>
+     <width>141</width>
+     <height>37</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sitka Text</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(212, 212, 0);
+border-color: rgb(255, 255, 0);
+border-radius:10px;</string>
+   </property>
+   <property name="text">
+    <string>Add Profile</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="deleteProfile">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>550</y>
+     <width>161</width>
+     <height>37</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sitka Text</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(212, 212, 0);
+border-color: rgb(255, 255, 0);
+border-radius:10px;</string>
+   </property>
+   <property name="text">
+    <string>Delete Profile</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="UserName">
+   <property name="geometry">
+    <rect>
+     <x>322</x>
+     <y>551</y>
+     <width>229</width>
+     <height>39</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sitka Text</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(212, 212, 0);
+border-color: rgb(255, 255, 0);
+border-radius:10px;</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

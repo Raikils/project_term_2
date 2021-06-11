@@ -141,7 +141,7 @@ border-radius:10px;</string>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="pushButton_toProfile">
           <property name="font">
            <font>
             <family>Sitka Text</family>
@@ -155,7 +155,7 @@ border-color: rgb(255, 255, 0);
 border-radius:10px;</string>
           </property>
           <property name="text">
-           <string>Add preference</string>
+           <string>Profile Menu</string>
           </property>
          </widget>
         </item>

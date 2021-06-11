@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "profilemenu.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -42,4 +43,11 @@ void MainWindow::film_search()
 void MainWindow::on_pushButton_clicked()
 {
     film_search();
+}
+
+void MainWindow::on_pushButton_toProfile_clicked()
+{
+    this->profilemenu = new ProfileMenu;
+    w->show();
+    this->hide();
 }
