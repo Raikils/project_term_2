@@ -4,6 +4,7 @@
 #include "rapidjson-master/include/rapidjson/stringbuffer.h"
 #include <QFile>
 #include <QDebug>
+#include "rapidapikey.h"
 
 
 
@@ -59,6 +60,23 @@ void Film::get_info_by_id(std::string id)
     buffer.clear();
 }
 
+void Film::get_ratings_type_date(std::map<std::string, std::string> &result)
+{
+    CURL* curl = curl_easy_init();
+    std::string url = "https://imdb8.p.rapidapi.com/title/get-overview-details?tconst=" + _id + "&currentCountry=US";
+    curl_set_options(curl);
+    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    curl_easy_perform(curl);
+    curl_easy_cleanup(curl);
+    rapidjson::Document doc;
+    doc.Parse(buffer.c_str());
+    qDebug() << doc.IsObject();
+    result["type"] = doc["title"]["titleType"].GetString();
+    result["Date"] = doc["releaseDate"].GetString();
+    result["Rating"] = std::to_string(doc["ratings"]["rating"].GetDouble());
+    buffer.clear();
+}
+
 std::string Film::getKey_rapid_api() const
 {
     return key_rapid_api;
@@ -72,6 +90,25 @@ void Film::setKey_rapid_api(const std::string &value)
 std::string Film::getDescription() const
 {
     return _description;
+}
+
+std::map<std::string, std::string> Film::get_full_info()
+{
+    std::map<std::string, std::string> result;
+    std::string value;
+    for (int i = 0; i < _genre.size(); i++) {
+        if (i != _genre.size() - 1) value += _genre[i] + ", ";
+        else value += _genre[i];
+    }
+    result["genre"] = value;
+
+    get_ratings_type_date(result);
+
+    result["src"] = "https://www.imdb.com/title/" + _id;
+
+    result["Plot"] = _description;
+
+    return result;
 }
 
 size_t Film::curl_write(void *ptr, size_t size, size_t nmemb, void *stream)
@@ -95,12 +132,14 @@ void Film::curl_set_options(CURL *curl)
 
 Film::Film(): _title(""), _id(""), _main_picture("")
 {
-    key_rapid_api = "0085a34427mshc7f717b41100917p17b262jsn6199c1564134";
+    RapidAPIKey key;
+    key_rapid_api = key.get_key();
 }
 
 Film::Film(std::string id)
 {
-    key_rapid_api = "0085a34427mshc7f717b41100917p17b262jsn6199c1564134";
+    RapidAPIKey key;
+    key_rapid_api = key.get_key();
     _id = id;
     get_info_by_id(id);
 }

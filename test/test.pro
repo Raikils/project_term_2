@@ -9,13 +9,15 @@ INCLUDEPATH += ../"Films for you"
 
 HEADERS += \
     ../"Films for you"/film.h \
-    ../"Films for you"/profile.h
+    ../"Films for you"/profile.h \
+    ../"Films for you"/rapidapikey.h
 
 
 SOURCES += \
     tst_test.cpp \
     ../"Films for you"/film.cpp \
-    ../"Films for you"/profile.cpp
+    ../"Films for you"/profile.cpp \
+    ../"Films for you"/rapidapikey.cpp
 
 
 

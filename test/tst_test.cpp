@@ -4,6 +4,8 @@
 #include "profile.h"
 #include <QFile>
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 class Test : public QObject
 {
@@ -39,6 +41,12 @@ void Test::test_film_class()
     QVERIFY(f.genre()[1] == "Adventure");
     QVERIFY(f.genre()[2] == "Drama");
     QVERIFY(f.genre()[3] == "Fantasy");
+
+    std::this_thread::sleep_for(std::chrono::seconds(10));
+    std::map<std::string, std::string> a = f.get_full_info();
+    for (const auto& k : a) {
+        std::cout << k.first << " " << k.second << std::endl;
+    }
 }
 
 void Test::test_profile_class()

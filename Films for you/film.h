@@ -19,6 +19,7 @@ private:
     static size_t curl_write( void *ptr, size_t size, size_t nmemb, void *stream);
     void curl_set_options(CURL *curl);
     void get_info_by_id(std::string id);
+    void get_ratings_type_date(std::map<std::string, std::string>& result);
 public:
     Film();
     Film(std::string id);
@@ -30,6 +31,7 @@ public:
     std::string getKey_rapid_api() const;
     void setKey_rapid_api(const std::string &value);
     std::string getDescription() const;
+    std::map<std::string, std::string> get_full_info();
 };
 
 #endif // FILM_H
