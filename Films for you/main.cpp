@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string>
 #include <curl/curl.h>
+#include <QFile>
 using namespace std;
 using namespace rapidjson;
 
@@ -105,9 +106,20 @@ using namespace rapidjson;
 
 int main(int argc, char *argv[])
 {
-
    QApplication a(argc, argv);
-     MainWindow w;
-     w.show();
-     return a.exec();
+   QFile f("profiles.dat");
+   f.open(QIODevice::ReadOnly);
+   QDataStream in(&f);
+   if(in.atEnd())
+   {
+       ProfileMenu *prof= new ProfileMenu;
+       prof->show();
+   }
+   else
+   {
+     MainWindow *w = new MainWindow;
+     w->show();
+   }
+   f.close();
+   return a.exec();
 }

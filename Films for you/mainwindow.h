@@ -19,11 +19,15 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void setProfile(const Profile &profile);
     ~MainWindow();
+
+public slots:
+    //void get_Profile(Profile profile);
+
 private slots:
     void film_search();
     void on_pushButton_clicked();
-
     void on_pushButton_toProfile_clicked();
 
 private:

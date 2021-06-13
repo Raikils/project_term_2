@@ -1,7 +1,9 @@
 #ifndef PROFILEMENU_H
 #define PROFILEMENU_H
 
+#include "profile.h"
 #include <QWidget>
+#include <QVector>
 
 namespace Ui {
 class ProfileMenu;
@@ -22,8 +24,11 @@ private slots:
 
     void on_SelectProfile_clicked();
 
+signals: void sendProfile(Profile profile);
+
 private:
     Ui::ProfileMenu *ui;
+    QVector<Profile> profile_vector;
 };
 
 #endif // PROFILEMENU_H

@@ -11,6 +11,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
+void MainWindow::setProfile(const Profile &profile)
+{
+    this->profile=profile;
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -48,6 +53,6 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_toProfile_clicked()
 {
     this->profilemenu = new ProfileMenu;
-    w->show();
+    profilemenu->show();
     this->hide();
 }
