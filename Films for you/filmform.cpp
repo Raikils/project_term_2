@@ -107,3 +107,12 @@ void FilmForm::on_Dislike_clicked()
 }
 
 
+
+void FilmForm::on_pushButton_All_Information_clicked()
+{
+    filmallinformation = new FilmAllInformationForm();
+    filmallinformation->SetFilm(GetFilm());
+    filmallinformation->SetImageFilm(GetImageFilm());
+    filmallinformation->show();
+}
+

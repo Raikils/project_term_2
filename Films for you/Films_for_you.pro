@@ -14,20 +14,25 @@ CONFIG += c++11
 
 SOURCES += \
     film.cpp \
+    filmallinformationform.cpp \
     filmform.cpp \
     main.cpp \
     mainwindow.cpp \
     profile.cpp \
-    profilemenu.cpp
+    profilemenu.cpp \
+    rapidapikey.cpp
 
 HEADERS += \
     film.h \
+    filmallinformationform.h \
     filmform.h \
     mainwindow.h \
     profile.h \
-    profilemenu.h
+    profilemenu.h \
+    rapidapikey.h
 
 FORMS += \
+    filmallinformationform.ui \
     filmform.ui \
     mainwindow.ui \
     profilemenu.ui
@@ -44,6 +49,9 @@ win32: LIBS += -LC:/Libs/curl-7.77.0-win64-mingw/lib -lcurl
 
 INCLUDEPATH += C:/Libs/curl-7.77.0-win64-mingw/include
 DEPENDPATH += C:/Libs/curl-7.77.0-win64-mingw/include
+
+DISTFILES += \
+    RapidAPI.txt
 
 
 

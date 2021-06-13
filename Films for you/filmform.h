@@ -8,6 +8,7 @@
 #include <QTextBrowser>
 #include "film.h"
 #include "profile.h"
+#include "filmallinformationform.h"
 namespace Ui {
 class FilmForm;
 }
@@ -32,15 +33,17 @@ public:
     void SetFilm(const Film& film);
     Film GetFilm();
 private slots:
-    QPixmap downloadFinished(QNetworkReply*);
     void on_Like_clicked();
     void on_Dislike_clicked();
+    void on_pushButton_All_Information_clicked();
 private:
+    QPixmap downloadFinished(QNetworkReply*);
     Profile *&profile;
     Film film;
     QString IdFilm;
     QPixmap imageFilm;
     Ui::FilmForm *ui;
+    FilmAllInformationForm *filmallinformation;
 };
 
 #endif // FILMFORM_H

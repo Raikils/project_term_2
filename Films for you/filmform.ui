@@ -163,6 +163,26 @@ padding-right:15px;</string>
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="pushButton_All_Information">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(212, 212, 0);
+border-color: rgb(255, 255, 0);
+border-radius:10px;
+margin:10px;
+padding-left:15px;
+padding-right:15px;</string>
+         </property>
+         <property name="text">
+          <string>All Information</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
