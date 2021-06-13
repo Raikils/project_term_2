@@ -47,12 +47,25 @@ void MainWindow::film_search()
 
 void MainWindow::on_pushButton_clicked()
 {
-    film_search();
+    //film_search();
+    QListWidgetItem * elem = new QListWidgetItem;
+    elem->setSizeHint(QSize(200,250));
+    Film f("tt1270797");
+    Profile *pr= new Profile;
+    FilmForm *filmform = new FilmForm(pr,f);
+    ui->listWidget_recommended_movie->addItem(elem);
+    ui->listWidget_recommended_movie->setItemWidget(elem,filmform);
 }
 
 void MainWindow::on_pushButton_toProfile_clicked()
 {
+<<<<<<< Updated upstream
     this->profilemenu = new ProfileMenu;
     profilemenu->show();
     this->hide();
+=======
+//    this->profilemenu = new ProfileMenu;
+//    w->show();
+//    this->hide();
+>>>>>>> Stashed changes
 }

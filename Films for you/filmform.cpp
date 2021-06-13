@@ -113,6 +113,7 @@ void FilmForm::on_pushButton_All_Information_clicked()
     filmallinformation = new FilmAllInformationForm();
     filmallinformation->SetFilm(GetFilm());
     filmallinformation->SetImageFilm(GetImageFilm());
+    filmallinformation->SetInfoToListWidget();
     filmallinformation->show();
 }
 

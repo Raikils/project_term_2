@@ -47,7 +47,7 @@ border-bottom:2px solid yellow;</string>
        <property name="minimumSize">
         <size>
          <width>350</width>
-         <height>550</height>
+         <height>525</height>
         </size>
        </property>
        <property name="styleSheet">
@@ -80,9 +80,15 @@ border:5px solid yellow;
    </item>
    <item>
     <widget class="QListWidget" name="listWidget_FilmInfo">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">border-color: rgb(255, 255, 0);
-border-radius:20px;</string>
+border-radius:20px;
+color:yellow;</string>
      </property>
     </widget>
    </item>
