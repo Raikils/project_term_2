@@ -18,14 +18,16 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     profile.cpp \
-    profilemenu.cpp
+    profilemenu.cpp \
+    rapidapikey.cpp
 
 HEADERS += \
     film.h \
     filmform.h \
     mainwindow.h \
     profile.h \
-    profilemenu.h
+    profilemenu.h \
+    rapidapikey.h
 
 FORMS += \
     filmform.ui \
