@@ -2,6 +2,7 @@
 #include <cmath>
 #include <QString>
 #include <QDebug>
+#include "rapidapikey.h"
 
 std::string Profile::name() const
 {
@@ -42,7 +43,7 @@ std::vector<std::string> Profile::search_films(int n, std::string genre)
     std::string url = "https://imdb8.p.rapidapi.com/title/get-popular-movies-by-genre?genre=%2Fchart%2Fpopular%2Fgenre%2F" + genre;
     curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "GET");
     struct curl_slist *headers = NULL;
-    std::string key = "x-rapidapi-key: 0085a34427mshc7f717b41100917p17b262jsn6199c1564134";
+    std::string key = "x-rapidapi-key: " + key_rapid_api;
     headers = curl_slist_append(headers, key.c_str());
     headers = curl_slist_append(headers, "x-rapidapi-host: imdb8.p.rapidapi.com");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
@@ -90,6 +91,8 @@ Profile::Profile()
     _genre["comedy-romance"] = weight;
     _genre["superhero"] = weight;
     _genre["action-comedy"] = weight;
+    RapidAPIKey key;
+    key_rapid_api = key.get_key();
 }
 
 void Profile::like(Film film)

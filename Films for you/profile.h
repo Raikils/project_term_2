@@ -21,6 +21,7 @@ private:
     std::map<std::string, double> _genre;
     std::string buffer;
     std::string _name;
+    std::string key_rapid_api;
     std::vector<std::string> _liked_films;
     void change_weight(std::map<std::string, double>& characteristic, std::string key, double delta);
     static size_t curl_write( void *ptr, size_t size, size_t nmemb, void *stream);
