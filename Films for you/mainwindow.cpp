@@ -28,6 +28,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::get_Profile_from_Profilemenu(Profile prof)
 {
+    qDebug() << "fasdfwe";
     profile = prof;
     this->show();
     delete profilemenu;
@@ -78,9 +79,6 @@ void MainWindow::on_pushButton_toProfile_clicked()
 
     profilemenu = new ProfileMenu;
     connect(profilemenu, SIGNAL(sendProfile(Profile)), this, SLOT(get_Profile_from_Profilemenu(Profile)));
-
-    this->profilemenu = new ProfileMenu;
-
     profilemenu->show();
     this->hide();
 }

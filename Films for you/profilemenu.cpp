@@ -3,6 +3,7 @@
 #include "mainwindow.h"
 #include <QMessageBox>
 #include <QFile>
+#include <QDebug>
 
 ProfileMenu::ProfileMenu(QWidget *parent) :
     QWidget(parent),
@@ -95,8 +96,9 @@ void ProfileMenu::on_SelectProfile_clicked()
         {
             if(profile_vector[i].name()==selected[0]->text().toStdString())
             {
-                 emit sendProfile(profile_vector[i]);
-                 break;
+                qDebug() << QString::fromStdString(profile_vector[i].name());
+                emit sendProfile(profile_vector[i]); 
+                break;
             }
         }
     }
