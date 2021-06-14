@@ -47,6 +47,7 @@ std::vector<std::string> Profile::search_films(int n, std::string genre)
     CURL* curl = curl_easy_init();
     CURLcode result;
     std::string url = "https://imdb8.p.rapidapi.com/title/get-popular-movies-by-genre?genre=%2Fchart%2Fpopular%2Fgenre%2F" + genre;
+    qDebug() << QString::fromStdString(url);
     curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "GET");
     struct curl_slist *headers = NULL;
     std::string key = "x-rapidapi-key: " + key_rapid_api;
@@ -62,6 +63,7 @@ std::vector<std::string> Profile::search_films(int n, std::string genre)
     rapidjson::Document doc;
     doc.Parse(buffer.c_str());
     rapidjson::Value& film_parse = doc;
+    qDebug() << doc.IsObject();
     std::string film;
     for (int i = 0; i < n; i++) {
         int ranom_int = rand.randomBetween(0, film_parse.Size() - 1);

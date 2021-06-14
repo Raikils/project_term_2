@@ -4,6 +4,8 @@
 #include "rapidjson-master/include/rapidjson/stringbuffer.h"
 #include <QFile>
 #include <QDebug>
+#include <algorithm>
+#include <cctype>
 #include "rapidapikey.h"
 
 
@@ -51,7 +53,9 @@ void Film::get_info_by_id(std::string id)
     _title = title_parse.GetString();
     _main_picture = img.GetString();
     for (int i = 0; i < genre_parse.Size(); i++) {
-        _genre.push_back(genre_parse[i].GetString());
+        std::string gen = genre_parse[i].GetString();
+        std::transform(gen.begin(), gen.end(), gen.begin(), tolower);
+        _genre.push_back(gen);
     }
     if (doc.HasMember("plotSummary")) {
         _description = doc["plotSummary"]["text"].GetString();

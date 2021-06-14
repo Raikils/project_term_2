@@ -12,18 +12,33 @@
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
-
+/*!
+ * \brief Main window of programme
+ * Main window of programme
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+    /*!
+     * Basic constructor of class
+     */
     MainWindow(QWidget *parent = nullptr);
+    /*!
+     * Sets profile
+     */
     void setProfile(const Profile &profile);
-    Profile GetProfile();
+    /*!
+     * Returns current profile
+     */
+    Profile GetProfile();  
     ~MainWindow();
 
 public slots:
+    /*!
+     * Slot for receiving profile from profilemenu
+     */
     void get_Profile_from_Profilemenu(Profile prof);
 
 private slots:
