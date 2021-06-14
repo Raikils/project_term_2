@@ -1,7 +1,7 @@
 #include "filmform.h"
 #include "ui_filmform.h"
 
-FilmForm::FilmForm( Profile *&profile,QWidget *parent) :
+FilmForm::FilmForm( Profile &profile,QWidget *parent) :
     QWidget(parent),
     profile(profile),
     ui(new Ui::FilmForm)
@@ -9,7 +9,7 @@ FilmForm::FilmForm( Profile *&profile,QWidget *parent) :
     ui->setupUi(this);
 }
 
-FilmForm::FilmForm( Profile *&profile,const Film &film, QWidget *parent):
+FilmForm::FilmForm( Profile &profile,const Film &film, QWidget *parent):
     QWidget(parent),
     profile(profile),
     ui(new Ui::FilmForm)
@@ -97,13 +97,13 @@ Film FilmForm::GetFilm()
 
 void FilmForm::on_Like_clicked()
 {
-    profile->like(GetFilm());
+    profile.like(GetFilm());
 }
 
 
 void FilmForm::on_Dislike_clicked()
 {
-     profile->dislike(GetFilm());
+     profile.dislike(GetFilm());
 }
 
 

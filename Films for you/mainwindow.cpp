@@ -21,6 +21,8 @@ void MainWindow::setProfile(const Profile &profile)
     this->profile=profile;
 }
 
+
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -53,8 +55,7 @@ void MainWindow::film_search()
         pair.first = Film(title);
         QListWidgetItem * elem = new QListWidgetItem;
         elem->setSizeHint(QSize(200,250));
-        Profile *pr= new Profile;
-        FilmForm *filmform = new FilmForm(pr);
+        FilmForm *filmform = new FilmForm(this->profile);
         filmform->SetImageFilm( QString::fromStdString(pair.first.main_picture()));
         filmform->SetTitleFilm( QString::fromStdString(pair.first.title()));
         filmform->SetFilm(pair.first);
@@ -67,7 +68,10 @@ void MainWindow::film_search()
         films.push_back(pair);
     }
 }
-
+Profile MainWindow::GetProfile()
+{
+    return profile;
+}
 
 void MainWindow::on_pushButton_clicked()
 {

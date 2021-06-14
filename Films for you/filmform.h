@@ -21,8 +21,8 @@ class FilmForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit FilmForm( Profile *&profile,QWidget *parent = nullptr);
-    explicit FilmForm( Profile *&profile,const Film& film, QWidget *parent = nullptr);
+    explicit FilmForm( Profile &profile,QWidget *parent = nullptr);
+    explicit FilmForm( Profile &profile,const Film& film, QWidget *parent = nullptr);
     ~FilmForm();
 public:
     /*!
@@ -71,7 +71,7 @@ private slots:
     void on_pushButton_All_Information_clicked();
 private:
     QPixmap downloadFinished(QNetworkReply*);
-    Profile *&profile;
+    Profile &profile;
     Film film;
     QString IdFilm;
     QPixmap imageFilm;

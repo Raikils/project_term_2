@@ -20,6 +20,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     void setProfile(const Profile &profile);
+    Profile GetProfile();
     ~MainWindow();
 
 public slots:
