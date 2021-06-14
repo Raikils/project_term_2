@@ -21,33 +21,45 @@ void FilmAllInformationForm::SetFilm(const Film &film)
 
 void FilmAllInformationForm::SetInfoToListWidget()
 {
-    ui->listWidget_FilmInfo->addItem(QString::fromStdString("Title :"));
-    ui->listWidget_FilmInfo->addItem(film.title().c_str());
+    std::string title ="<font face=Sitka>";
+    title+="Title: ";
+    title+="</font>";
+    title+= film.title();
+    ui->textBrowser_FilmInfo->append(QString::fromStdString(title));
+     ui->textBrowser_FilmInfo->append(" ");
     std::map<std::string, std::string> full_info = film.get_full_info();
     for (auto &elem : full_info) {
         if(elem.first == "Plot"){
-            QListWidgetItem * listelem= new QListWidgetItem;
-            listelem->setSizeHint(QSize(200,75));
-            QTextBrowser* description = new QTextBrowser();
-            description->setText(elem.second.c_str());
-            description->setStyleSheet("border:0px solid;color:yellow; font-size:14px");
-            std::string plot = elem.first;
-            ui->listWidget_FilmInfo->addItem(QString::fromStdString(elem.first.c_str())+":");
-            ui->listWidget_FilmInfo->addItem(listelem);
-            ui->listWidget_FilmInfo->setItemWidget(listelem,description);
+            std::string plot ="<font face=Sitka>";
+            plot+="Plot: ";
+            plot+="</font>";
+            ui->textBrowser_FilmInfo->append(QString::fromStdString(plot));
+            ui->textBrowser_FilmInfo->append(elem.second.c_str());
+            ui->textBrowser_FilmInfo->append(" ");
         }
         else if(elem.first =="src"){
-            ui->listWidget_FilmInfo->addItem(QString::fromStdString(elem.first.c_str())+":");
-            ui->listWidget_FilmInfo->addItem(elem.second.c_str());
+            std::string date ="<font face=Sitka>";
+            date+="Src: ";
+            date+="</font>";
+            date+=elem.second;
+            ui->textBrowser_FilmInfo->append(QString::fromStdString(date));
+            ui->textBrowser_FilmInfo->append(" ");
         }
         else if(elem.first =="Date"){
-            std::string link = elem.first+": "+elem.second;
-            ui->listWidget_FilmInfo->addItem(link.c_str());
+            std::string src ="<font face=Sitka>";
+            src+="Date: ";
+            src+="</font>";
+            src+= elem.second;
+            ui->textBrowser_FilmInfo->append(src.c_str());
+            ui->textBrowser_FilmInfo->append(" ");
         }
         else{
-            std::string plot = elem.first;
-            ui->listWidget_FilmInfo->addItem(QString::fromStdString(plot.c_str())+":");
-            ui->listWidget_FilmInfo->addItem(elem.second.c_str());
+           std::string info ="<font face=Sitka>";
+           info+= elem.first+": ";
+           info+="</font>";
+           info+=elem.second;
+           ui->textBrowser_FilmInfo->append(QString::fromStdString(info.c_str()));
+           ui->textBrowser_FilmInfo->append(" ");
         }
 
     }

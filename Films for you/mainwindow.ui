@@ -32,7 +32,7 @@ background-color: qlineargradient(spread:pad, x1:0.249692, y1:0.215, x2:1, y2:1,
 border: 2px solid ;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -69,55 +69,7 @@ border-radius:20px;</string>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="font">
-           <font>
-            <family>Sitka Text</family>
-            <pointsize>14</pointsize>
-            <weight>50</weight>
-            <italic>true</italic>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(212, 212, 0);
-border:none;
-background-color: none;</string>
-          </property>
-          <property name="text">
-           <string>Your preferences</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QListWidget" name="listWidget">
-          <property name="minimumSize">
-           <size>
-            <width>200</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>350</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="baseSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">border-color: rgb(255, 255, 0);
-border-radius:20px;</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <layout class="QVBoxLayout" name="verticalLayout_2"/>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
@@ -136,7 +88,7 @@ border-color: rgb(255, 255, 0);
 border-radius:10px;</string>
           </property>
           <property name="text">
-           <string>Clear</string>
+           <string>Recomendation</string>
           </property>
          </widget>
         </item>
