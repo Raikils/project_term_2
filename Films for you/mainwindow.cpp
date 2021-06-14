@@ -56,6 +56,7 @@ void MainWindow::film_search()
         FilmForm *filmform = new FilmForm(pr);
         filmform->SetImageFilm( QString::fromStdString(pair.first.main_picture()));
         filmform->SetTitleFilm( QString::fromStdString(pair.first.title()));
+        filmform->SetFilm(pair.first);
         QTextBrowser* description = new QTextBrowser();
         description->setText(QString::fromStdString(pair.first.getDescription()));
         filmform->SetDescription(description);
@@ -74,8 +75,12 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_toProfile_clicked()
 {
+
     profilemenu = new ProfileMenu;
     connect(profilemenu, SIGNAL(sendProfile(Profile)), this, SLOT(get_Profile_from_Profilemenu(Profile)));
+
+    this->profilemenu = new ProfileMenu;
+
     profilemenu->show();
     this->hide();
 }
