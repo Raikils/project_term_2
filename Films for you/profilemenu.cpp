@@ -91,16 +91,14 @@ void ProfileMenu::on_SelectProfile_clicked()
             out<<profile_vector[i];
         }
         f.close();
-        MainWindow *w = new MainWindow;
         for(int i=0; i<profile_vector.size(); i++)
         {
             if(profile_vector[i].name()==selected[0]->text().toStdString())
             {
-                 w->setProfile(profile_vector[i]);
+                 emit sendProfile(profile_vector[i]);
                  break;
             }
         }
-        w->show();
     }
     else
     {

@@ -20,6 +20,7 @@ SOURCES += \
     mainwindow.cpp \
     profile.cpp \
     profilemenu.cpp \
+    randomgenerate.cpp \
     rapidapikey.cpp
 
 HEADERS += \
@@ -29,6 +30,7 @@ HEADERS += \
     mainwindow.h \
     profile.h \
     profilemenu.h \
+    randomgenerate.h \
     rapidapikey.h
 
 FORMS += \

@@ -1,14 +1,19 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "profilemenu.h"
+#include <QFile>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //std::vector<std::string> a = {"tt0944947", "tt0944947"};
-
+    QFile f("Curentprofil.dat");
+    f.open(QIODevice::ReadOnly);
+    QDataStream in(&f);
+    in >> profile;
+    f.close();
+    qDebug() << QString::fromStdString(profile.name());
 }
 
 void MainWindow::setProfile(const Profile &profile)
@@ -21,10 +26,27 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::get_Profile_from_Profilemenu(Profile prof)
+{
+    profile = prof;
+    this->show();
+    delete profilemenu;
+    QFile f("Curentprofil.dat");
+    f.open(QIODevice::WriteOnly);
+    QDataStream out(&f);
+    out << profile;
+    f.close();
+    qDebug() << QString::fromStdString(profile.name());
+}
+
 
 void MainWindow::film_search()
 {
     std::vector<std::string> films_title = profile.recommendation();
+    for (const auto& e : films_title) {
+        qDebug() << QString::fromStdString(e);
+    }
+    qDebug() << "Dasdsadas";
     for (const auto &title : films_title) {
         QPair<Film,FilmForm*> pair;
         pair.first = Film(title);
@@ -47,25 +69,13 @@ void MainWindow::film_search()
 
 void MainWindow::on_pushButton_clicked()
 {
-    //film_search();
-    QListWidgetItem * elem = new QListWidgetItem;
-    elem->setSizeHint(QSize(200,250));
-    Film f("tt1270797");
-    Profile *pr= new Profile;
-    FilmForm *filmform = new FilmForm(pr,f);
-    ui->listWidget_recommended_movie->addItem(elem);
-    ui->listWidget_recommended_movie->setItemWidget(elem,filmform);
+    film_search();
 }
 
 void MainWindow::on_pushButton_toProfile_clicked()
 {
-<<<<<<< Updated upstream
-    this->profilemenu = new ProfileMenu;
+    profilemenu = new ProfileMenu;
+    connect(profilemenu, SIGNAL(sendProfile(Profile)), this, SLOT(get_Profile_from_Profilemenu(Profile)));
     profilemenu->show();
     this->hide();
-=======
-//    this->profilemenu = new ProfileMenu;
-//    w->show();
-//    this->hide();
->>>>>>> Stashed changes
 }

@@ -23,7 +23,7 @@ public:
     ~MainWindow();
 
 public slots:
-    //void get_Profile(Profile profile);
+    void get_Profile_from_Profilemenu(Profile prof);
 
 private slots:
     void film_search();

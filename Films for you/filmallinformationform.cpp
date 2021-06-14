@@ -23,7 +23,8 @@ void FilmAllInformationForm::SetInfoToListWidget()
 {
     ui->listWidget_FilmInfo->addItem(QString::fromStdString("Title :"));
     ui->listWidget_FilmInfo->addItem(film.title().c_str());
-    for (auto &elem : film.get_full_info()) {
+    std::map<std::string, std::string> full_info = film.get_full_info();
+    for (auto &elem : full_info) {
         if(elem.first == "Plot"){
             QListWidgetItem * listelem= new QListWidgetItem;
             listelem->setSizeHint(QSize(200,75));

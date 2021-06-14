@@ -36,6 +36,7 @@ std::vector<std::string> Film::genre() const
 
 void Film::get_info_by_id(std::string id)
 {
+    qDebug() << QString::fromStdString(id);
     CURL* curl = curl_easy_init();
     std::string url = "https://imdb8.p.rapidapi.com/title/get-overview-details?tconst=" + id + "&currentCountry=US";
     curl_set_options(curl);
@@ -52,11 +53,12 @@ void Film::get_info_by_id(std::string id)
     for (int i = 0; i < genre_parse.Size(); i++) {
         _genre.push_back(genre_parse[i].GetString());
     }
-    if (doc["plotSummary"].IsObject()) {
+    if (doc.HasMember("plotSummary")) {
         _description = doc["plotSummary"]["text"].GetString();
-    } else {
+    } else if (doc.HasMember("plotOutline")) {
         _description = doc["plotOutline"]["text"].GetString();
-    }
+    } else _description = "";
+
     buffer.clear();
 }
 
@@ -73,7 +75,9 @@ void Film::get_ratings_type_date(std::map<std::string, std::string> &result)
     qDebug() << doc.IsObject();
     result["type"] = doc["title"]["titleType"].GetString();
     result["Date"] = doc["releaseDate"].GetString();
+    if (doc["ratings"].HasMember("rating")) {
     result["Rating"] = std::to_string(doc["ratings"]["rating"].GetDouble());
+    }
     buffer.clear();
 }
 

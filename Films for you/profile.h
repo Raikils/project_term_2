@@ -23,16 +23,18 @@ private:
     std::string _name;
     std::string key_rapid_api;
     std::vector<std::string> _liked_films;
-    void change_weight(std::map<std::string, double>& characteristic, std::string key, double delta);
+    void change_weight(std::map<std::string, double>& characteristic, std::vector<std::string> key, double delta);
+
+    std::map<std::string, int> recommendation_genre(int number_of_films);
+    std::vector<std::string> more_like_leked(int number_of_films);
     static size_t curl_write( void *ptr, size_t size, size_t nmemb, void *stream);
 public:
-    Profile();
-    std::vector<std::string> search_films(int n, std::string genre);
+    Profile();  
     void like(Film film);
     void dislike(Film film);
+    std::vector<std::string> search_films(int n, std::string genre);
     std::map<std::string, double> genre() const;
     void set_genre(const std::map<std::string, double>& value);
-    std::map<std::string, int> recommendation_genre();
     std::vector<std::string> recommendation();
     std::string name() const;
     void setName(const std::string &name);
