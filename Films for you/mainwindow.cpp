@@ -45,6 +45,8 @@ void MainWindow::get_Profile_from_Profilemenu(Profile prof)
 
 void MainWindow::film_search()
 {
+    ui->listWidget_recommended_movie->clear();
+    films.clear();
     std::vector<std::string> films_title = profile.recommendation();
     for (const auto& e : films_title) {
         qDebug() << QString::fromStdString(e);
